@@ -23,7 +23,7 @@ def dhtfunc():
     # initialize GPIO
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
-##    GPIO.setup(dhtpin, GPIO.IN)
+    GPIO.setup(dhtpin, GPIO.IN)
     GPIO.cleanup()
     dhtdata=[]
 
@@ -51,11 +51,9 @@ def pir():
     
     buzzer = Buzzer(bzr)
 
-##  while True:
     pir.wait_for_motion()
     buzzer.on()
     sleep(1)
-##  pir.wait_for_no_motion()
     buzzer.off()
 
 def main_call():
@@ -82,18 +80,12 @@ def main_call():
 
 @app.route("/")
 def index():
-#       DHTRetData=[]
-#       DHTRetData=(dhtfunc())
         dhtfuncsts='Disable'
         pirfuncsts='Disable'
-#        tempsts=DHTRetData[0]
-#        humsts=DHTRetData[1]
               
         templateData = {
         'dhtsts'  : dhtfuncsts,
         'PIRsts'  : pirfuncsts,
-#        'temp'  : tempsts,
-#        'hum'   : humsts,     
          
         }
         return render_template('index.html', **templateData)
